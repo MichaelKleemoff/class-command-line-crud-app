@@ -1,18 +1,25 @@
-function create(animals, animalName) {}
+const { nanoid } = require('nanoid');
+const animalPoints = require('../data/animalPoints.json');
 
-function index(animals) {
-	return animals.map((animal) => animal.id + ' ' + animal.name).join('\n');
+function create(animals, animalName) {
+	const animal = {
+		name: animalName,
+		id: nanoid(4),
+		points: animalPoints[animalName],
+	};
+	animals.push(animal);
+	return animals;
 }
 
-function show(animals, animalId) {
-	const animal = animals.find((animal) => animal.id === animalId);
-	return animal.id + ' ' + animal.name + ' ' + animal.points + ' ' + ' points';
-}
+// function index(animals) {
+// 	return animals.map((animal) => animal.id + ' ' + animal.name).join('\n');
+// }
 
-// module.exports = {
-// 	create,
-// 	destroy,
-// 	edit,
-// 	index,
-// 	show,
-// };
+// function show(animals, animalId) {
+// 	const animal = animals.find((animal) => animal.id === animalId);
+// 	return animal.id + ' ' + animal.name + ' ' + animal.points + ' ' + ' points';
+// }
+
+module.exports = {
+	create,
+};

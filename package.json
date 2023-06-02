@@ -5,18 +5,21 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-		"start": "node index.js",
-		"index": "node index.js index",
-		"create": "node index.js create",
-		"show": "node index.js show",
-		"update": "node index.js update",
-		"destroy": "node index.js destroy",
-		"score": "node index.js score"
+    "start": "node index.js",
+    "index": "node index.js index",
+    "create": "node index.js create",
+    "show": "node index.js show",
+    "update": "node index.js update",
+    "destroy": "node index.js destroy",
+    "score": "node index.js score"
   },
   "keywords": [],
   "author": "Michael Kleemoff",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.5.0"
+  },
+  "dependencies": {
+    "nanoid": "^3.3.6"
   }
 }
