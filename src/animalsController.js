@@ -11,9 +11,9 @@ function create(animals, animalName) {
 	return animals;
 }
 
-// function index(animals) {
-// 	return animals.map((animal) => animal.id + ' ' + animal.name).join('\n');
-// }
+function index(animals) {
+	return animals.map((animal) => animal.id + ' ' + animal.name).join('\n');
+}
 
 // function show(animals, animalId) {
 // 	const animal = animals.find((animal) => animal.id === animalId);
@@ -22,4 +22,5 @@ function create(animals, animalName) {
 
 module.exports = {
 	create,
+	index,
 };
