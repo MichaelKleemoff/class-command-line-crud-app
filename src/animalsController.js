@@ -1,6 +1,9 @@
+// Make random unique ids with the `nanoid` npm package.
 const { nanoid } = require('nanoid');
+// Access `animalPoints.json` to get points for when the user passes in the `score` string at the command line.
 const animalPoints = require('../data/animalPoints.json');
 
+// `create` onde `animal` object and `push` it to `animals.json` into an array of `animal` objects based on the `animal` string that the user passes in at the command line (using `process.argv`).
 function create(animals, animalName) {
 	const animal = {
 		name: animalName,
@@ -11,16 +14,19 @@ function create(animals, animalName) {
 	return animals;
 }
 
+// Typically, an `index` is a list of things with limited details. When you think of an online store, you usually see one image, a name, and a price. Then when you click the item, you will see more details.
 function index(animals) {
 	return animals.map((animal) => animal.id + ' ' + animal.name).join('\n');
 }
 
-// function show(animals, animalId) {
-// 	const animal = animals.find((animal) => animal.id === animalId);
-// 	return animal.id + ' ' + animal.name + ' ' + animal.points + ' ' + ' points';
-// }
+// Thinking about an online store, you also want to see a detailed view of an item. In this case, the user would pass the `id` to see a detailed view using the `show` string in the command line.
+function show(animals, animalId) {
+	const animal = animals.find((animal) => animal.id === animalId);
+	return animal.id + ' ' + animal.name + ' ' + animal.points + ' ' + ' points';
+}
 
 module.exports = {
 	create,
 	index,
+	show,
 };

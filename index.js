@@ -1,5 +1,5 @@
 const { readJSONFile, writeJSONFile } = require('./src/helpers');
-const { create, index } = require('./src/animalsController');
+const { create, index, show } = require('./src/animalsController');
 
 // Intention: `inform` is an alias for `console.log`. When developing/debugging use `console.log` (`console.log` is for the developer). When providing user feedback use `inform` (`inform` is for the user of our app).
 const inform = console.log;
@@ -26,7 +26,8 @@ function run() {
 			writeToFile = true;
 			break;
 		case 'show':
-			inform(action, animal);
+			const animalView = show(animals, animal);
+			inform(animalView);
 			break;
 		case 'update':
 			inform(action, animal);
@@ -40,6 +41,7 @@ function run() {
 		default:
 			inform('There was an error.');
 	}
+	// Write some logic on whether or not to write to the file after the switch statement.
 	if (writeToFile) {
 		writeJSONFile('data', 'animals.json', updatedAnimals);
 	}
