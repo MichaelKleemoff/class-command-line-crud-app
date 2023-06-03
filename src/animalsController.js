@@ -2,8 +2,9 @@
 const { nanoid } = require('nanoid');
 // Access `animalPoints.json` to get points for when the user passes in the `score` string at the command line.
 const animalPoints = require('../data/animalPoints.json');
+const inform = console.log;
 
-// `create` onde `animal` object and `push` it to `animals.json` into an array of `animal` objects based on the `animal` string that the user passes in at the command line (using `process.argv`).
+// `create` one `animal` object and `push` it to `animals.json` into an array of `animal` objects based on the `animal` string that the user passes in at the command line (using `process.argv`).
 function create(animals, animalName) {
 	const animal = {
 		name: animalName,
@@ -22,11 +23,25 @@ function index(animals) {
 // Thinking about an online store, you also want to see a detailed view of an item. In this case, the user would pass the `id` to see a detailed view using the `show` string in the command line.
 function show(animals, animalId) {
 	const animal = animals.find((animal) => animal.id === animalId);
-	return animal.id + ' ' + animal.name + ' ' + animal.points + ' ' + ' points';
+	return animal.id + ' ' + animal.name + ' ' + animal.points + ' points';
+}
+
+// `destroy` an `animal` by the `id`. `delete` is a keyword in JavaScript. You cannot name a function of this word. Therefore, the alternative word `destroy` will be used.
+function destroy(animals, animalId) {
+	const index = animals.findIndex((animal) => animal.id === animalId);
+	if (index > -1) {
+		animals.splice(index, 1);
+		inform('Animal successfully removed from collection');
+		return animals;
+	} else {
+		inform('Animal not found. No action taken');
+		return animals;
+	}
 }
 
 module.exports = {
 	create,
 	index,
 	show,
+	destroy,
 };
