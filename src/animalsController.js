@@ -2,15 +2,18 @@
 const { nanoid } = require('nanoid');
 // Access `animalPoints.json` to get points for when the user passes in the `score` string at the command line.
 const animalPoints = require('../data/animalPoints.json');
+// Inform the user in the console.
 const inform = console.log;
 
 // `create` one `animal` object and `push` it to `animals.json` into an array of `animal` objects based on the `animal` string that the user passes in at the command line (using `process.argv`).
-function create(animals, animalName) {
-	const animal = {
-		name: animalName,
-		id: nanoid(4),
-		points: animalPoints[animalName],
-	};
+function create(animals, animalName, points) {
+	const animal = !points
+		? {
+				name: animalName,
+				id: nanoid(4),
+				points: animalPoints[animalName],
+		  }
+		: { name: animalName, id: nanoid(4), points };
 	animals.push(animal);
 	return animals;
 }
@@ -39,9 +42,25 @@ function destroy(animals, animalId) {
 	}
 }
 
+// `update` the animal. You'll use the `id` for this action as well. Additionally, you'll need to enter the new animal name.
+function edit(animals, animalId, updatedAnimal) {
+	const index = animals.findIndex((animal) => animal.id === animalId);
+	if (index > -1) {
+		animals[index].id = animalId;
+		animals[index].name = updatedAnimal;
+		animals[index].points = animalPoints[updatedAnimal];
+		inform('Animal successfully updated');
+		return animals;
+	} else {
+		inform('Animal not found. No action taken');
+		return animals;
+	}
+}
+
 module.exports = {
 	create,
+	destroy,
+	edit,
 	index,
 	show,
-	destroy,
 };

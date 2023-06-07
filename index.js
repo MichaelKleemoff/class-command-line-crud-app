@@ -1,5 +1,11 @@
 const { readJSONFile, writeJSONFile } = require('./src/helpers');
-const { create, index, show, destroy } = require('./src/animalsController');
+const {
+	create,
+	destroy,
+	edit,
+	index,
+	show,
+} = require('./src/animalsController');
 
 // Intention: `inform` is an alias for `console.log`. When developing/debugging use `console.log` (`console.log` is for the developer). When providing user feedback use `inform` (`inform` is for the user of our app).
 const inform = console.log;
@@ -11,9 +17,6 @@ function run() {
 	let writeToFile = false;
 	let updatedAnimals = [];
 
-	console.log('List of arguments for this `process.argv`', process.argv);
-	console.log('Here is our `animals` data: ', animals);
-
 	inform('Welcome to our Animals App 🙉🙈🐵🐒\n\n');
 
 	switch (action) {
@@ -22,7 +25,7 @@ function run() {
 			inform(animalsView);
 			break;
 		case 'create':
-			updatedAnimals = create(animals, animal);
+			updatedAnimals = create(animals, animal, Number(process.argv[4]));
 			writeToFile = true;
 			break;
 		case 'show':
@@ -30,7 +33,8 @@ function run() {
 			inform(animalView);
 			break;
 		case 'update':
-			inform(action, animal);
+			updatedAnimals = edit(animals, animal, process.argv[4]);
+			writeToFile = true;
 			break;
 		case 'destroy':
 			updatedAnimals = destroy(animals, animal);
