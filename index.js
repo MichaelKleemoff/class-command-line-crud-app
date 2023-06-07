@@ -25,7 +25,7 @@ function run() {
 			inform(animalsView);
 			break;
 		case 'create':
-			updatedAnimals = create(animals, animal, Number(process.argv[4]));
+			updatedAnimals = create(animals, animal);
 			writeToFile = true;
 			break;
 		case 'show':
@@ -41,7 +41,8 @@ function run() {
 			writeToFile = true;
 			break;
 		case 'score':
-			inform(action);
+			const score = animals.reduce((acc, curr) => acc + curr.points, 0);
+			inform('Current score', score);
 			break;
 		default:
 			inform('There was an error.');

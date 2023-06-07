@@ -6,14 +6,13 @@ const animalPoints = require('../data/animalPoints.json');
 const inform = console.log;
 
 // `create` one `animal` object and `push` it to `animals.json` into an array of `animal` objects based on the `animal` string that the user passes in at the command line (using `process.argv`).
-function create(animals, animalName, points) {
-	const animal = !points
-		? {
-				name: animalName,
-				id: nanoid(4),
-				points: animalPoints[animalName],
-		  }
-		: { name: animalName, id: nanoid(4), points };
+function create(animals, animalName) {
+	const animal = {
+		name: animalName,
+		id: nanoid(4),
+		points: animalPoints[animalName],
+	};
+
 	animals.push(animal);
 	return animals;
 }
